@@ -1,0 +1,37 @@
+class Solution {
+    public int maxDepth(TreeNode root) 
+    {
+        Queue<TreeNode> queue = new LinkedList();
+        List<Integer> current = new ArrayList();
+        
+        int count = 0;
+        
+        if(root == null) return 0;
+        
+        queue.offer(root);
+        queue.offer(null);
+        
+        while(!queue.isEmpty())
+        {
+            TreeNode temp = queue.poll();
+            
+            if(temp != null)
+            {
+                current.add(temp.val);
+            
+                if(temp.left != null) queue.offer(temp.left);
+                if(temp.right != null) queue.offer(temp.right);
+            }
+            else
+            {
+                count ++;
+                current.clear();
+                
+                if(!queue.isEmpty())
+                    queue.offer(null);
+                    
+            }
+        }
+        return count;
+    }
+}
